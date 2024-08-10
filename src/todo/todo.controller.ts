@@ -34,6 +34,10 @@ export class TodoController {
   findAllTodoByUserIdCompleted(@Param('userId') userId: number) {
     return this.todoService.findAllTodoByUserCompleted(Number(userId));
   }
+  @Get('/findAllTodo/:userId')
+  findAllTodoByUserId(@Param('userId') userId: number) {
+    return this.todoService.findAllTodoByUserId(Number(userId));
+  }
 
 
 

@@ -6,7 +6,7 @@ import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
-import { User } from 'src/user/entities/user.entity';
+import { Users } from 'src/user/entities/user.entity';
 import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
@@ -18,13 +18,15 @@ export class AuthController {
     @Post('login')
     @UseGuards(AuthGuard("local"))
     login(@Req() req, @Body() loginDto:LoginDto ) {
-        const user:User=req.user
+        const users:Users=req.user
+        console.log(users);
+        
         const payload={
-            userId:user.id,
-            firstName:user.firstName,
-            lastName:user.lastName,
-            email:user.email,
-            role:user.role
+            userId:users.id,
+            firstName:users.firstName,
+            lastName:users.lastName,
+            email:users.email,
+            role:users.role
         }
         
         return{token:this.jwtService.sign(payload)}

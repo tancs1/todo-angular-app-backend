@@ -17,23 +17,25 @@ export class TodoService {
     todo.title = createTodoDto.title;
     todo.date = new Date().toLocaleString();
     todo.completed = false;
-    todo.user = await this.userService.findUserByID(userId);
+    todo.users = await this.userService.findUserByID(userId);
     return this.todoRepository.save(todo);
   }
 
   findAllTodoByUserNotCompleted(userId: number) {
     return this.todoRepository.find({
-      relations: ['user'],
-      where: { user: { id: userId }, completed: false },
+      relations: ['users'],
+      where: { users: { id: userId }, completed: false },
     });
   }findAllTodoByUserCompleted(userId: number) {
     return this.todoRepository.find({
-      relations: ['user'],
-      where: { user: { id: userId }, completed: true },
+      relations: ['users'],
+      where: { users: { id: userId }, completed: true },
     });
-  }
+  }findAllTodoByUserId(userId: number) {
+    return this.todoRepository.find({ relations: ['users'],
+      where: { users: { id: userId } },});
 
- 
+  }
 
   update(id: number) {
     return this.todoRepository.update(id, { completed: true });

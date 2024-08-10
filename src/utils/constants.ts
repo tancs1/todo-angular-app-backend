@@ -3,5 +3,5 @@ export const Constants = {
     ADMIN: 'ADMIN',
     USER: 'USER',
   },
-  BY_PASS_URLS:['/auth/login','/user/signUp']
+  BY_PASS_URLS:['/auth/login','/users/signUp']
 };

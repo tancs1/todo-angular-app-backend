@@ -6,7 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { TodoModule } from './todo/todo.module';
-import { User } from './user/entities/user.entity';
+import { Users } from './user/entities/user.entity';
 import { Todo } from './todo/entities/todo.entity';
 
 @Module({
@@ -27,7 +27,7 @@ import { Todo } from './todo/entities/todo.entity';
         database: configService.get('DATABASE_NAME'),
         synchronize: configService.get<boolean>('DATABASE_SYNC'),
         logging: configService.get<boolean>('DATABASE_LOGGING'),
-        entities: [User, Todo],
+        entities: [Users, Todo],
       }),
     }),
     UserModule,

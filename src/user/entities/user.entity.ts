@@ -2,7 +2,7 @@ import { Todo } from "src/todo/entities/todo.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class User {
+export class Users {
     @PrimaryGeneratedColumn()
     id: number;
     @Column()
@@ -16,6 +16,6 @@ export class User {
     @Column()
     role: string;
 
-    @OneToMany(()=>Todo ,(todo)=>todo.user)
+    @OneToMany(()=>Todo ,(todo)=>todo.users)
     todos: Todo[];
 }

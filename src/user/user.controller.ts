@@ -17,12 +17,19 @@ import { RoleGuard } from 'src/auth/guard/role.guard';
 import { Constants } from 'src/utils/constants';
 import { ApiSecurity, ApiTags } from '@nestjs/swagger';
 
-@Controller('user')
-@ApiTags("User")
+@Controller('users')
+@ApiTags("Users")
 
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
+  @Get("/findAllForLogin")
+  findAllForLogin() {
+    
+    console.log("findAllForLogin called");
+    const result = this.userService.findAllUser();
+    console.log(result);
+    return result;
+  } 
   @Post("/signUp")
   create(@Body(ValidationPipe) createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
@@ -42,4 +49,10 @@ export class UserController {
   remove(@Param('id') id: number,@Req() req) {
     return this.userService.remove(id);
   }
+
+   @Get(":email")
+  finduserLogin(@Param('email') email: string,@Req() req) {
+    return this.userService.findUserByEmail(email);
+  }
+
 }
